@@ -105,9 +105,11 @@ function ExpenseForm({ onCancel, onSubmit, defaultValues, submitButtonLabel }) {
       </View>
       {formIsInvalid && <Text style={styles.errorText}>Invalid Fields!</Text>}
       <View style={styles.buttons}>
-        <Button style={styles.button} mode={"flat"} onPress={onCancel}>
-          Cancel
-        </Button>
+        {submitButtonLabel === "Update" && (
+          <Button style={styles.button} mode={"flat"} onPress={onCancel}>
+            Cancel
+          </Button>
+        )}
         <Button style={styles.button} onPress={submitHandler}>
           {submitButtonLabel}
         </Button>

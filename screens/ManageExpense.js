@@ -52,6 +52,7 @@ function ManageExpense({ route, navigation }) {
         const id = await storeExpense(expenseData);
         expensesCtx.addExpense({ ...expenseData, id: id });
       }
+      setIsSubmitting(false);
       closeManageScreen();
     } catch (error) {
       setError("Could not save data - please try again later!");
@@ -59,8 +60,12 @@ function ManageExpense({ route, navigation }) {
     }
   }
 
+  function errorHandler() {
+    setError(null);
+  }
+
   if (error && !isSubmitting) {
-    return <ErrorOverlay message={error} />;
+    return <ErrorOverlay message={error} onConfirm={errorHandler} />;
   }
 
   if (isSubmitting) {
